@@ -30,16 +30,29 @@ for doc in docs:
 
 	nlp.add_pipe(ruler)
 
-print(nlp.pipe_names) # Lets review what are the entities in our model
+#print(nlp.pipe_names) # Let's review what are the entities in our model
 
 # User input 
-sentence = "Healthcare and Water logging in Anand"
+sentence = "Mrudang caught in Child Pornography, causing earthquake with traffic jam due to cattle since 2 hours in Vidyanagar, Anand!"
 doc = nlp(sentence)
-print([(X.text, X.label_) for X in doc.ents])
+a = [(X.text, X.label_) for X in doc.ents]
+#print(a) # List of the entities : reason
+d = {}
 tokenList = nltk.word_tokenize(sentence)
 for ent in doc.ents:
 	if ent.label_ == "GPE" or ent.label_ == "NORP" or ent.label_ == "LOC":
-		print('location = ',ent.text)
+		d["Location"] = ent.text
+		#print('location = ',ent.text)
 	if ent.label_ == "TIME":
-		print('Time = ', ent.text)
-	print(ent.text , '->', ent.label_)
+		d["Time"] = ent.text
+s = sentence.replace(',','')
+s = s.replace('.','')
+s = s.replace('!','')
+s = s.replace('?','')
+s = s.lower()
+doc = nlp(s)
+a = [(X.text, X.label_) for X in doc.ents]
+tokenList = nltk.word_tokenize(sentence)
+for ent in doc.ents:
+	d[ent.label_] = ent.text
+print(d)
