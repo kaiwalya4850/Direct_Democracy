@@ -13,6 +13,9 @@ from nltk.corpus import wordnet
 from spacy.matcher import PhraseMatcher
 from spacy.tokens import Span
 from firestore_read import read_entities
+from translate import lan
+
+
 def add_ruler(entity_name,entity_arr):
 	ruler = EntityRuler(nlp, overwrite_ents=True)
 	for d in entity_arr:
@@ -33,7 +36,11 @@ for doc in docs:
 #print(nlp.pipe_names) # Let's review what are the entities in our model
 
 # User input 
-sentence = "Parth caught in security fraud, causing earthquake with traffic jam due to cattle since 2 hours in Vidyanagar, Anand!"
+#ip = "Parth was caught in security fraud and dating abuse in Vidyanagar. Heavy rains for 4 hours caused water logging, earthquake and leukemia in Anand."
+ip = 'પાર્થને વિદ્યાનગરમાં સુરક્ષા દગા અને ડેટિંગના દુરૂપયોગમાં પકડ્યો હતો. આણંદમાં 4 કલાક ભારે વરસાદને પગલે જળસંચય, ભૂકંપ અને લ્યુકેમિયા સર્જાયા હતા.'
+sentence = lan(ip)
+
+
 doc = nlp(sentence)
 a = [(X.text, X.label_) for X in doc.ents]
 #print(a) # List of the entities : reason
