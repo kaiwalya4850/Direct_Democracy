@@ -33,7 +33,7 @@ for doc in docs:
 #print(nlp.pipe_names) # Let's review what are the entities in our model
 
 # User input 
-sentence = "Mrudang caught in Child Pornography, causing earthquake with traffic jam due to cattle since 2 hours in Vidyanagar, Anand!"
+sentence = "Parth caught in security fraud, causing earthquake with traffic jam due to cattle since 2 hours in Vidyanagar, Anand!"
 doc = nlp(sentence)
 a = [(X.text, X.label_) for X in doc.ents]
 #print(a) # List of the entities : reason
