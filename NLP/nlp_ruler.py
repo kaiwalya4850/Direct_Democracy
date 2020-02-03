@@ -26,8 +26,10 @@ nlp = spacy.load('en_core_web_sm')
 
 
 rulerAll = EntityRuler(nlp, overwrite_ents=True)
-
+print("Pulling Data from Fire store ")
 docs=read_entities()
+
+print("Creating Pipelines ")
 for doc in docs:
 	ruler=add_ruler(doc.id,doc.to_dict()['values'])
 
@@ -38,10 +40,11 @@ for doc in docs:
 # User input 
 #ip = "Parth was caught in security fraud and dating abuse in Vidyanagar. Heavy rains for 4 hours caused water logging, earthquake and leukemia in Anand."
 ip = 'Shastrai maidain ke pass malaria cases bad gaye hai'
+print("Translating ")
 sentence = lan(ip)
 print(sentence)
 
-
+print("Classifing ")
 doc = nlp(sentence)
 a = [(X.text, X.label_) for X in doc.ents]
 #print(a) # List of the entities : reason
