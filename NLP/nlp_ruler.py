@@ -37,8 +37,9 @@ for doc in docs:
 
 # User input 
 #ip = "Parth was caught in security fraud and dating abuse in Vidyanagar. Heavy rains for 4 hours caused water logging, earthquake and leukemia in Anand."
-ip = 'પાર્થને વિદ્યાનગરમાં સુરક્ષા દગા અને ડેટિંગના દુરૂપયોગમાં પકડ્યો હતો. આણંદમાં 4 કલાક ભારે વરસાદને પગલે જળસંચય, ભૂકંપ અને લ્યુકેમિયા સર્જાયા હતા.'
+ip = 'Shastrai maidain ke pass malaria cases bad gaye hai'
 sentence = lan(ip)
+print(sentence)
 
 
 doc = nlp(sentence)
