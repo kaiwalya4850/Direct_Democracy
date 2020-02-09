@@ -38,7 +38,7 @@ def check_prexist_report(UID,report,db):
 	flag=0
 	report_ref = db.collection(u'REPORTS')
 	query = report_ref.where(u'UID', u'==', str(UID)).where(u'report', u'==', str(report))
-	docs = db.collection(u'cities').where(u'capital', u'==', True).stream()
+	docs = query.stream()
 	for doc in docs:
 		flag=flag+1
 	return flag
