@@ -22,7 +22,7 @@ search_words = "@ForTPeople"+"-filter:retweets"
 today = date.today()- timedelta(days=1)
 date_since = str(today)
 unprocessed_ids=[]
-tweets = tw.Cursor(api.search,q=search_words,lang="en",since=date_since).items(10)
+tweets = tw.Cursor(api.search,q=search_words,since=date_since).items(10)
 print(tweets)
 #################################Twitter query####################################################
 #################################firestore check and feed####################################################
