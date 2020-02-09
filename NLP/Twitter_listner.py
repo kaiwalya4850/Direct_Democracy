@@ -27,10 +27,12 @@ print(tweets)
 #################################Twitter query####################################################
 #################################firestore check and feed####################################################
 for tweet in tweets:
+	
+	str_final=tweet.text.replace('@ForTPeople', '')
 	print(tweet.text)
-	flag=check_prexist_report(str(tweet.user.screen_name),str(tweet.text),db)
+	flag=check_prexist_report(str(tweet.user.screen_name),str(str_final),db)
 	if flag==0:
-		id=add_feed_to_reports(str(tweet.user.screen_name),str(tweet.text),db)
+		id=add_feed_to_reports(str(tweet.user.screen_name),str(str_final),db)
 	unprocessed_ids.append(id)
 #################################firestore check and feed####################################################
 
