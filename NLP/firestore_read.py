@@ -1,7 +1,5 @@
-import firestore_auth
 
-db=firestore_auth.auth()
 
-def read_entities():
+def read_entities(db):
 	docs = db.collection(u'NLP').stream()
 	return docs
