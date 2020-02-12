@@ -2,7 +2,7 @@ import os
 import tweepy as tw
 import pandas as pd
 from datetime import date,timedelta
-from firestore_add import check_prexist_report,add_feed_to_reports,get_reports
+from firestore_add import check_prexist_report,add_feed_to_reports,get_reports,push_reports_classified
 from nlp_ruler import NLP_E
 import firestore_auth
 ###################Auth#####################################
@@ -19,10 +19,10 @@ db=firestore_auth.auth()
 
 #################################Twitter query####################################################
 search_words = "@ForTPeople"+"-filter:retweets"
-today = date.today()- timedelta(days=1)
+today = date.today()- timedelta(days=10)
 date_since = str(today)
 unprocessed_ids=[]
-tweets = tw.Cursor(api.search,q=search_words,since=date_since).items(10)
+tweets = tw.Cursor(api.search,q=search_words,since=date_since).items(100)
 print(tweets)
 #################################Twitter query####################################################
 #################################firestore check and feed####################################################
@@ -33,7 +33,7 @@ for tweet in tweets:
 	flag=check_prexist_report(str(tweet.user.screen_name),str(str_final),db)
 	if flag==0:
 		id=add_feed_to_reports(str(tweet.user.screen_name),str(str_final),db)
-	unprocessed_ids.append(id)
+		unprocessed_ids.append(id)
 #################################firestore check and feed####################################################
 
 
@@ -45,4 +45,5 @@ for ids in unprocessed_ids:
 	print("Report: ",report)
 	print("results")
 	print(d)
+	push_reports_classified(d,ids,db)
 #################################Process tweets####################################################

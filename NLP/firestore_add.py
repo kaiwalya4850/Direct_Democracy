@@ -49,3 +49,7 @@ def get_reports(id,db):
 	dic=doc.to_dict()
 	report=dic['report']
 	return report
+	
+def push_reports_classified(dic,id,db):
+	doc_ref = db.collection(u'REPORTS_CLASSIFIED').document(str(id))
+	doc_ref.set(dic)
