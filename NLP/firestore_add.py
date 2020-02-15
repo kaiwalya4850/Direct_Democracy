@@ -27,10 +27,10 @@ def add_feed_to_nlp(entity_name,entity_array_data,db):
 # add_feed_to_nlp("Infrastructure",['test'])
 
 
-def add_feed_to_reports(UID,report,db):
+def add_feed_to_reports(UID,report,loc,db):
 	doc_ref = db.collection(u'REPORTS').document()
 	
-	dic={u'UID':str(UID),u'report':str(report)}
+	dic={u'UID':str(UID),u'report':str(report),u'DATA_LOC':str(loc)}
 	doc_ref.set(dic)
 	return (doc_ref.id)
 	

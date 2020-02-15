@@ -19,7 +19,7 @@ db=firestore_auth.auth()
 
 #################################Twitter query####################################################
 search_words = "@ForTPeople"+"-filter:retweets"
-today = date.today()- timedelta(days=10)
+today = date.today()- timedelta(days=3)
 date_since = str(today)
 unprocessed_ids=[]
 tweets = tw.Cursor(api.search,q=search_words,since=date_since).items(100)
@@ -32,7 +32,7 @@ for tweet in tweets:
 	print(tweet.text)
 	flag=check_prexist_report(str(tweet.user.screen_name),str(str_final),db)
 	if flag==0:
-		id=add_feed_to_reports(str(tweet.user.screen_name),str(str_final),db)
+		id=add_feed_to_reports(str(tweet.user.screen_name),str(str_final),str(tweet.user.location),db)
 		unprocessed_ids.append(id)
 #################################firestore check and feed####################################################
 
