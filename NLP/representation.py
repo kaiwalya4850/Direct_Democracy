@@ -6,7 +6,7 @@ cred = credentials.Certificate("ftposs-9bbdd6e0ec3b.json")
 app = firebase_admin.initialize_app(cred)
 
 store = firestore.client()
-doc_ref = store.collection(u'REPORTS_CLASSIFIED')
+doc_ref = store.collection(u'NLP')
 n=0
 try:
     docs = doc_ref.stream()
