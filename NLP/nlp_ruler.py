@@ -20,7 +20,7 @@ def NLP_E(ip,db):
 
 
 	def add_ruler(entity_name,entity_arr):
-		ruler = EntityRuler(nlp)
+		ruler = EntityRuler(nlp, overwrite_ents=True)
 		for d in entity_arr:
 			ruler.add_patterns([{"label": str(entity_name), "pattern": str(d)}])
 		ruler.name = str(entity_name)
@@ -37,7 +37,7 @@ def NLP_E(ip,db):
 	for doc in docs:
 		ruler=add_ruler(doc.id,doc.to_dict()['values'])
 
-		nlp.add_pipe(ruler, before='ner')
+		nlp.add_pipe(ruler)
 
 	#print(nlp.pipe_names) # Let's review what are the entities in our model
 
