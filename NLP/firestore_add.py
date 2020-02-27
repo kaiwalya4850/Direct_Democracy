@@ -1,5 +1,5 @@
 import firestore_auth
-
+import time
 
 ##########################use to create new entities#######################
 def add_ent_to_nlp(entity_name,entity_array_data,db):
@@ -30,7 +30,7 @@ def add_feed_to_nlp(entity_name,entity_array_data,db):
 def add_feed_to_reports(UID,report,loc,db):
 	doc_ref = db.collection(u'REPORTS').document()
 	
-	dic={u'UID':str(UID),u'report':str(report),u'DATA_LOC':str(loc),u'TS':firebase.database.ServerValue.TIMESTAMP}
+	dic={u'UID':str(UID),u'report':str(report),u'DATA_LOC':str(loc),u'TS':str(int(time.time()))}
 	doc_ref.set(dic)
 	return (doc_ref.id)
 	
@@ -52,5 +52,5 @@ def get_reports(id,db):
 	
 def push_reports_classified(dic,id,db):
 	doc_ref = db.collection(u'REPORTS_CLASSIFIED').document(str(id))
-	dic['TS']=firebase.database.ServerValue.TIMESTAMP
+	dic['TS']=str(int(time.time()))
 	doc_ref.set(dic)
