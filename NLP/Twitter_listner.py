@@ -45,5 +45,10 @@ for ids in unprocessed_ids:
 	print("Report: ",report)
 	print("results")
 	print(d)
+	if len(d)==0:
+		print("unclassified, add to human classifer")
+	if len(d)<=2:
+		print("weakly classified, add to human classifier")
+		
 	push_reports_classified(d,ids,db)
 #################################Process tweets####################################################
