@@ -1,4 +1,5 @@
 from firestore_add import add_ent_to_nlp
+import firestore_auth
 db=firestore_auth.auth()
 # # Add the synonyms for entity
 # disaster = ['flood','floods','earthquake','earthquakes','hurricane','hurricanes','storms','storm','landslide','landslides','avalanche','avalanches','tsunami','blizzard','tornado','tornadoes','drought','droughts','thunderstorm','thunderstorms']
