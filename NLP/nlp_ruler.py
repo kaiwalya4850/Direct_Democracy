@@ -65,7 +65,7 @@ def NLP_E(ip,db):
 	s = s.replace('!','')
 	s = s.replace('?','')
 	s = s.lower()
-	doc = nlp(s)
+	# doc = nlp(s)
 	# a = [(X.text, X.label_) for X in doc.ents]
 	tokenList = nltk.word_tokenize(sentence)
 	for ent in doc.ents:
