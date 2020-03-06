@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:chat_app/chat_screen.dart';
-import 'package:chat_app/home_page.dart';
-import 'package:chat_app/main.dart';
-import 'package:chat_app/models/user_details.dart';
+import 'package:forthepeople/chat_screen.dart';
+import 'package:forthepeople/home_page.dart';
+import 'package:forthepeople/main.dart';
+import 'package:forthepeople/models/user_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
