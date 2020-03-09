@@ -1,52 +1,20 @@
-import 'package:forthepeople/chat_screen.dart';
-import 'package:forthepeople/home_page.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'login_page.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  MyAppState createState() {
-    return new MyAppState();
-  }
-}
-
-class MyAppState extends State<MyApp> {
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  GoogleSignIn googleSignIn = GoogleSignIn();
-  bool isLoggedIn = false;
-
-  void isSignedIn() async {
-    if (await googleSignIn.isSignedIn()) {
-      setState(() {
-        isLoggedIn = true;
-      });
-    } else {
-      setState(() {
-        isLoggedIn = false;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    isSignedIn();
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Chat App",
-      theme: ThemeData(primarySwatch: Colors.red),
-      routes: <String, WidgetBuilder>{
-        '/chatscreen': (BuildContext context) => new ChatScreen(),
-      },
-      home: isLoggedIn == false ? ChatScreen() : HomePage(),
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Login',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: LoginPage(),
     );
   }
 }
