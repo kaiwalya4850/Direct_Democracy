@@ -22,6 +22,9 @@ dependencies:
   google_sign_in:
   firebase_storage:
   image_picker:
+  form_bloc:
+  flutter_form_bloc:
+  flutter_bloc:
   flutter:
     sdk: flutter
 
