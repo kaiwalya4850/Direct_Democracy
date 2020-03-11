@@ -23,8 +23,12 @@ dependencies:
   firebase_storage:
   image_picker:
   form_bloc:
+  flushbar :
+  liquid_progress_indicator :
   flutter_form_bloc:
   flutter_bloc:
+  shared_preferences :
+
   flutter:
     sdk: flutter
 

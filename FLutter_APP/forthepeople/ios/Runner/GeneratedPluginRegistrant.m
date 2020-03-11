@@ -28,12 +28,6 @@
 @import firebase_storage;
 #endif
 
-#if __has_include(<flutter_keyboard_visibility/KeyboardVisibilityPlugin.h>)
-#import <flutter_keyboard_visibility/KeyboardVisibilityPlugin.h>
-#else
-@import flutter_keyboard_visibility;
-#endif
-
 #if __has_include(<google_sign_in/FLTGoogleSignInPlugin.h>)
 #import <google_sign_in/FLTGoogleSignInPlugin.h>
 #else
@@ -46,6 +40,18 @@
 @import image_picker;
 #endif
 
+#if __has_include(<keyboard_utils/KeyboardUtilsPlugin.h>)
+#import <keyboard_utils/KeyboardUtilsPlugin.h>
+#else
+@import keyboard_utils;
+#endif
+
+#if __has_include(<shared_preferences/FLTSharedPreferencesPlugin.h>)
+#import <shared_preferences/FLTSharedPreferencesPlugin.h>
+#else
+@import shared_preferences;
+#endif
+
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
@@ -53,9 +59,10 @@
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseStoragePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseStoragePlugin"]];
-  [FLTKeyboardVisibilityPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTKeyboardVisibilityPlugin"]];
   [FLTGoogleSignInPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleSignInPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
+  [KeyboardUtilsPlugin registerWithRegistrar:[registry registrarForPlugin:@"KeyboardUtilsPlugin"]];
+  [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
 }
 
 @end
