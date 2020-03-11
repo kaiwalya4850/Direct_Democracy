@@ -40,16 +40,13 @@ class LoginFormBloc extends FormBloc<String, String> {
       'UID': email,
       'report': state.fieldBlocFromPath('grevience').asTextFieldBloc.value
     });
- /*   var doc = await databaseReference.document('Async/Count').get();
 
-    print(doc['val']);
-    var val =int.parse(doc['val']);
 
     await databaseReference.collection("Async")
-        .document('Count')
+        .document('State')
         .setData({
-      'val': val+1,
-    });*/
+      'val': '1',
+    });
 
 
 
