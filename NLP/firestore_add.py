@@ -33,7 +33,13 @@ def add_feed_to_reports(UID,report,loc,db):
 	dic={u'UID':str(UID),u'report':str(report),u'DATA_LOC':str(loc),u'TS':str(int(time.time()))}
 	doc_ref.set(dic)
 	return (doc_ref.id)
+
+def add_feed_to_ucreports(UID,id,report,loc,db):
+	doc_ref = db.collection(u'REPORTS_UNCLASSIFIED').document(str(id))
 	
+	dic={u'UID':str(UID),u'report':str(report),u'DATA_LOC':str(loc),u'TS':str(int(time.time()))}
+	doc_ref.set(dic)
+	return (doc_ref.id)	
 def check_prexist_report(UID,report,db):
 	flag=0
 	report_ref = db.collection(u'REPORTS')
@@ -53,4 +59,8 @@ def get_reports(id,db):
 def push_reports_classified(dic,id,db):
 	doc_ref = db.collection(u'REPORTS_CLASSIFIED').document(str(id))
 	dic['TS']=str(int(time.time()))
+	doc_ref.set(dic)
+def async_set_state_on(db):
+	doc_ref = db.collection(u'Async').document('State')
+	dic={u'val':'1'}
 	doc_ref.set(dic)

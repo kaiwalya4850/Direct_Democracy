@@ -2,7 +2,7 @@ import os
 import tweepy as tw
 import pandas as pd
 from datetime import date,timedelta
-from firestore_add import check_prexist_report,add_feed_to_reports,get_reports,push_reports_classified
+from firestore_add import check_prexist_report,add_feed_to_reports,get_reports,push_reports_classified,add_feed_to_ucreports
 from nlp_ruler import NLP_E
 import firestore_auth
 ###################Auth#####################################
@@ -33,6 +33,7 @@ for tweet in tweets:
 	flag=check_prexist_report(str(tweet.user.screen_name),str(str_final),db)
 	if flag==0:
 		id=add_feed_to_reports(str(tweet.user.screen_name),str(str_final),str(tweet.user.location),db)
+		add_feed_to_ucreports(str(tweet.user.screen_name),id,str(str_final),str(tweet.user.location),db)
 		unprocessed_ids.append(id)
 #################################firestore check and feed####################################################
 
