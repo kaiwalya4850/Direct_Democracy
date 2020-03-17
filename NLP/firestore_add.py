@@ -40,6 +40,13 @@ def add_feed_to_ucreports(UID,id,report,loc,db):
 	dic={u'UID':str(UID),u'report':str(report),u'DATA_LOC':str(loc),u'TS':str(int(time.time()))}
 	doc_ref.set(dic)
 	return (doc_ref.id)	
+	
+def add_feed_to_WEreports(id,db):
+	doc_ref = db.collection(u'WEAK_NO_CLASSIFIED').document(str(id))
+	
+	dic={}
+	doc_ref.set(dic)
+	return (doc_ref.id)	
 def check_prexist_report(UID,report,db):
 	flag=0
 	report_ref = db.collection(u'REPORTS')
@@ -55,7 +62,13 @@ def get_reports(id,db):
 	dic=doc.to_dict()
 	report=dic['report']
 	return report
-	
+def get_UCreports(db):
+	doc_ref = db.collection(u'REPORTS_UNCLASSIFIED')
+	doc = doc_ref.stream()
+	return doc	
+def del_UCreports(db,id):
+	doc_ref = db.collection(u'REPORTS_UNCLASSIFIED').document(str(id))
+	doc = doc_ref.delete()
 def push_reports_classified(dic,id,db):
 	doc_ref = db.collection(u'REPORTS_CLASSIFIED').document(str(id))
 	dic['TS']=str(int(time.time()))
@@ -64,3 +77,5 @@ def async_set_state_on(db):
 	doc_ref = db.collection(u'Async').document('State')
 	dic={u'val':'1'}
 	doc_ref.set(dic)
+
+
