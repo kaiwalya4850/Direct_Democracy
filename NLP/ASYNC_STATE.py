@@ -41,4 +41,4 @@ doc_watch = doc_ref.on_snapshot(on_snapshot)
 
 while 1:
 	time.sleep(10)
-	print('program is running....')
+	print('Listning to FS for state updates....')
