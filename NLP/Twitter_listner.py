@@ -40,17 +40,17 @@ for tweet in tweets:
 
 
 #################################Process tweets####################################################
-for ids in unprocessed_ids:
-	report=get_reports(ids,db)
-	d=NLP_E(report,db)
+# for ids in unprocessed_ids:
+	# report=get_reports(ids,db)
+	# d=NLP_E(report,db)
 	
-	print("Report: ",report)
-	print("results")
-	print(d)
-	if len(d)==0:
-		print("unclassified, add to human classifer")
-	if len(d)<=2:
-		print("weakly classified, add to human classifier")
+	# print("Report: ",report)
+	# print("results")
+	# print(d)
+	# if len(d)==0:
+		# print("unclassified, add to human classifer")
+	# if len(d)<=2:
+		# print("weakly classified, add to human classifier")
 		
-	push_reports_classified(d,ids,db)
+	# push_reports_classified(d,ids,db)
 #################################Process tweets####################################################
