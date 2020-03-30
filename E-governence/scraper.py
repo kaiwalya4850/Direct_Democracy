@@ -57,6 +57,16 @@ db=auth()
 final_df= DRaft_df.append(pending_df)
 final_df=final_df.reset_index()
 final_df=final_df.drop(columns=['index'])
+
+
+
+for index, row in final_df.iterrows():
+	print(row['BILL_Name'], row['BIll_link'], row['Bill_type'])
+	doc_ref = db.collection(u'E-gov').document(row['BILL_Name'])
+	doc_ref.set({
+	u'BIll_link': row['BIll_link'],
+	u'Bill_type': row['Bill_type']})
+	
 final_df.to_csv("res.csv")
 
 print(final_df)
