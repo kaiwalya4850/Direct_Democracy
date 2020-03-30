@@ -1,6 +1,11 @@
 import google.cloud
 import firebase_admin
 from firebase_admin import credentials, firestore
+from flask import Flask, render_template, request, redirect, url_for, session
+import firestore_auth
+
+app = Flask(__name__)
+app.secret_key = 'any random string'
 
 cred = credentials.Certificate("ftposs-50575d1883e8.json")
 app = firebase_admin.initialize_app(cred)
@@ -31,8 +36,8 @@ def entity_cal(lst):
 		    z.append(y)
 		    j = j+1
 	    i = i+1
-    entity_list = list(set(z))
-    print(entity_list)
+    entity_list = list(set(z)) # list of entities on db # 
+    #print(entity_list)
     final = []
     for i in range(len(entity_list)):
 	    k = entity_list[i]
