@@ -56,6 +56,8 @@ print(pending_df)
 
 final_df= DRaft_df.append(pending_df)
 final_df=final_df.reset_index()
+final_df=final_df.drop(columns=['index'])
 final_df.to_csv("res.csv")
+
 print(final_df)
 driver.close()
