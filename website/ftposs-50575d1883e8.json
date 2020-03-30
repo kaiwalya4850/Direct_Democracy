@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ftposs",
+  "private_key_id": "50575d1883e867ea8bc262189599c10f674bffd1",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDbx1+yiCLM6ULB\n353PwN55NAUByvHJWXmYtDCuyslExKqRyfrCHzDMxtvQjGbQSmHaeVCk2Tqj9Mu1\n7q6F63e5poBNrfXpZ1MxL26uIG5KnGAV564Qq3K14Q/AHijhLrezjl2TAmMsxyAS\nZda2DbYLaZMuPHL0oXahx/ic4iN2qr7kSaqTBFo98erKWkdMxThxFUVoKbrABjjH\nfaoac+v2QIVdKYGtlCkoqEeFiNmbjUvJx3tFpH3Cuec1uZ7M/hWTyp76PkpR+01P\n4PYFP++sg71SefCdJ6/aX9fKOYTq5K0DHI8o6agucvLq/ErbpPNNX6WtFkUFvH1U\nyv6jCm17AgMBAAECggEACc5nYFgZlt2STYPew0p/9C06M/cvGBkFB2GblWJy9UlH\nslZRViwJYNbLASY/sOBAwvDGbUvXqFjIZh6l4QoDVneiIkmH4iTqo7ddicwqduua\nMwi9WYiyqiM6pZdKLu8S4i4cjDPznOHdpKje9yPUYq5WWTWbF9kKTMVLmTuwCQij\nZZiC97R+4a1eBawAqeBZnWdtFoNAYb5WycQ+eNTpisupQb52n3eLsmQMbCF1NqHp\nHWQY/5qI2Has5p8jxRT+GfzGTZFCkBnEvK6skYVxHND94M+VNeqSabPjgj1CK4/G\nB5mh9mhL1V/RtwpUlwjCI09rRj5AHDpNHVNtdw1IUQKBgQD6ixwV9Pe3jjVJ/kRf\nlXciTLcrIDdMD3F+vX298k/atey0KIVb8zmGPtKHxkKGrVayfMCu8S5b02SIGA4e\nZialHxnmBP+11Th7yh//SfPRJz34VTCsv9GGJe8PFw8b0kz9VEnfAyMzVtVzVN0l\nlPEyAgf16+E1BswJjU44puJDNwKBgQDgkLzmRU8WT7uivmDlBUqQxonpf932vpKs\nsOYpwjInRlWYaqRGQNuDby5/P/5WznSCBu51SameMchuPD5mrPh93jW4EYlA0VE0\nwo/ogBFUE3g/G/l0Bt5GnmJqeTDedorH+t/LaR14yWpbF5L6Lf3gGrzWn3C0uzDE\nvHDkth5R3QKBgGrPESsfItfizT79IeLp0j8SG2hMNKa9UrIoUEnA2mAv/HgVajz3\n5MchUxlE4SmPDg3Ld01dTlkhNpN6RdKZ09HC/4R7DxRSkODdG2T2/vVkWFvc3YJX\nyBf7Zf214+AFeILrAw8KxF/nndmsDRcvdt/N09z4MSss+aD816L5Ki5jAoGAZLoH\nQPJNqyBQdYsXQyLAc3faXFXyZb7NY5BlbM2iWWN++UK8NJba33V7UbCOkLlCISCi\nzREhd8e0s11qT/u96hdF2S5kdiJtXlD2476uBxxEj2oo1hZOlTZtxnxdoytgzJqG\nz2Jyyb7uabWFQ5pliaP0mAAkOazNDzHHIY9ewjECgYEAlGKz8rljiKjICLYwgqFB\nzaCSpma3Ldv2vVleZMzPazxoJAgBlKjNlvq7NRIDoklkNMVs65erb6NEWUDXk1zC\n9fVP80kCTKHNKEKJzKvrtNc8osGHM3PUnt3FGLW7V55kX6xvtJ/05hdpPF6EL/Tp\nyKTGaGYxFjT77B7zHnEDHAg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "website@ftposs.iam.gserviceaccount.com",
+  "client_id": "108519258944976285093",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/website%40ftposs.iam.gserviceaccount.com"
+}

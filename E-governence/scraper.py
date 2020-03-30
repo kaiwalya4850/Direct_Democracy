@@ -2,7 +2,7 @@ from selenium import webdriver
 import time 
 import pandas as pd
 from bs4 import BeautifulSoup
-
+from firestore_auth import auth
 def tablemaker(soup,bill_type):
 	column_names = ["BILL_Name", "BIll_link","Bill_type"]
 	df = pd.DataFrame(columns = column_names)
@@ -53,7 +53,7 @@ print(pending_df)
 # print(soup)
 
 
-
+db=auth()
 final_df= DRaft_df.append(pending_df)
 final_df=final_df.reset_index()
 final_df=final_df.drop(columns=['index'])
