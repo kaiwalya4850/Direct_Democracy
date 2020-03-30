@@ -6,14 +6,26 @@ cred = credentials.Certificate("ftposs-50575d1883e8.json")
 app = firebase_admin.initialize_app(cred)
 
 store = firestore.client()
-doc_ref = store.collection(u'NLP')
-n={}
+doc_ref = store.collection(u'REPORTS_CLASSIFIED')
+n=[]
 try:
     docs = doc_ref.stream()
     for doc in docs:
-        print(u'Doc Data:{}'.format(doc.to_dict()))
         a = doc.to_dict()
-        n = a
+        n.append(a)
 except:
     print(u'Missing data')
-print(doc)
+#print(n)
+k = 0
+keys = []
+value = []
+for i in range(len(n)):
+	z = n[k]
+	key = z.keys()
+	keys.append(key)
+	val = z.values()
+	value.append(val)
+	k = k+1
+print(keys[0][11])
+
+
