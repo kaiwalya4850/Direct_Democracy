@@ -4,8 +4,8 @@ from firebase_admin import credentials, firestore
 from flask import Flask, render_template, request, redirect, url_for, session
 import firestore_auth
 
-app = Flask(__name__)
-app.secret_key = 'any random string'
+appf = Flask(__name__)
+appf.secret_key = 'any random string'
 
 cred = credentials.Certificate("ftposs-50575d1883e8.json")
 app = firebase_admin.initialize_app(cred)
@@ -54,9 +54,13 @@ for i in range(len(n)):
 	k.pop(-1) #since every last element is a timestamp
 	values.append(k)
 
-
 a = entity_cal(values)
 print(a)
+data = a[0]
+@appf.route("/")
+def home():
+    return render_template("index.html", content=data)
 
 
-
+if __name__ == "__main__":
+	appf.run()
