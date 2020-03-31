@@ -19,6 +19,9 @@
 			window.addEventListener( 'unload', function() { window.name = ''; }, false );
 		}
 	}());
+	function myFunction() {
+  	document.getElementById("demo").innerHTML = {{content}};
+	}
 	</script>
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 <link rel="dns-prefetch" href="//s.w.org">
@@ -239,11 +242,11 @@ img.emoji {
 
 
 
-<p>Entity 1:  {{content}}</p>
+<p>Entity 1:</p>
 
 
 
-<p>Entity 2:</p>
+<p id="demo" onmouseover="myFunction()">Entity 2:</p>
 
 
 
