@@ -54,10 +54,34 @@ for i in range(len(n)):
 	k.pop(-1) #since every last element is a timestamp
 	values.append(k)
 
+# Part to generate reports #
+def checkKey(dict, key):      
+    if key in dict.keys(): 
+        #print("Present, value is", dict[key]) 
+        val = "yes"
+    else:
+        val = "no"
+    return val
+# Gets all the data with certain entity #
+# Pass all data as dict and a black list to store #
+def report_gen(key_name,entity_reports_list):
+    for i in range(len(n)):
+        k = n[i]
+        c = checkKey(k,key_name)
+        if c is "yes":
+            entity_reports_list.append(k)
+        else:
+            pass
+
 a = entity_cal(values)
 print(a)
 data = a[0]
+
+
+
+# Lets start with Flask #
 @appf.route("/")
+# Home Page, display only count in numbers #
 def home():
     return render_template("index.html", content=data)
 
