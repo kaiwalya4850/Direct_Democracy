@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <link rel="pingback" href="http://localhost/wordpress/xmlrpc.php">
-        <title>For The People – to-the-rescue</title>
+        <title>For The People</title>
     <meta name="robots" content="noindex,nofollow">
         <script>
         ( function() {
@@ -198,14 +198,9 @@
                                             <div class="container clear">
                                                 <nav id="navigation" class="primary-navigation mobile-menu-wrapper" role="navigation">
                                                                                                 <span class="site-logo" itemprop="headline">
-                                                            <a href="http://localhost/wordpress">to-the-rescue</a>
+                                                            <a href="http://localhost/wordpress">For The People</a>
                                                         </span><!-- END #logo -->
                                                     
-            
-                                                                                                <ul class="menu clearfix toggle-menu">
-                                                                <li class="cat-item cat-item-1"><a href="http://localhost/wordpress/category/uncategorized/">Uncategorized</a>
-            </li>
-                                                        </ul>
                                                                                             <a href="#" id="accessibility-close-mobile-menu"></a>
                                                 <div id="mobile-menu-overlay"></div></nav><!-- #site-navigation -->
                                             </div>
@@ -215,9 +210,7 @@
                                             <a href="http://localhost/wordpress">
                                                 <div class="site-branding">
                                                     <div class="site-title">
-                                                        to-the-rescue										</div>
-                                                    <div class="site-description">
-                                                        Just another WordPress site										</div>
+                                                        For The People										</div>
                                                 </div><!-- .site-branding -->
                                             </a>
                                         </div>
@@ -240,47 +233,94 @@
             
             
             
-            <h2>Classified Reports</h2>
+            <h2>Classified individual reports:</h2>
             
             
             
-            <h4>Entity name:</h4>
+            <h4>Location Reports:</h4>
             
             
             
-            <p>Entity Reports:</p>
+            <p>
+                <ol>
+                    {%for i in range(0, len)%} 
+					<li>{{location_final_reports[i]}}</li> 
+                {%endfor%} 
+                </ol>
+            </p>
             
             
             
-            <h4> Entity name: </h4>
+            <h4> Infrastructure Reports: </h4>
+                 
+            <p>
+                    <ol>
+                        {%for i in range(0, len1)%} 
+                        <li>{{infra_final_reports[i]}}</li> 
+                    {%endfor%} 
+                    </ol>
+                </p>
             
             
             
-            <p>Entity Reports:</p>
+            <h4> Loneliness Reports: </h4>
+            
+            <p>
+                    <ol>
+                        {%for i in range(0, len2)%} 
+                        <li>{{loneliness_final_reports[i]}}</li> 
+                    {%endfor%} 
+                    </ol>
+                </p>
+            
+            <h4> Diseases Reports:  </h4>
+            
+            <p>
+                    <ol>
+                        {%for i in range(0, len3)%} 
+                        <li>{{diseases_final_reports[i]}}</li> 
+                    {%endfor%} 
+                    </ol>
+                </p>
             
             
+            <h4> Date Reports:  </h4>
             
-            <h4> Entity name: </h4>
-            
-            
-            
-            <p> Entity Reports: </p>
-            
-            
-            
+            <p>
+                    <ol>
+                        {%for i in range(0, len4)%} 
+                        <li>{{date_final_reports[i]}}</li> 
+                    {%endfor%} 
+                    </ol>
+                </p>
+
+            <h3> For future updates...</h3>
             <h4> Entity name:  </h4>
             
             
             
             <p> Entity Reports: </p>
-            
-            
-            
+                                      
+
             <h4> Entity name:  </h4>
             
             
             
             <p> Entity Reports: </p>
+                                      
+
+            <h4> Entity name:  </h4>
+            
+            
+            
+            <p> Entity Reports: </p>
+                                      
+            <h4> Entity name:  </h4>
+            
+            
+            
+            <p> Entity Reports: </p>
+                                      
                                                 
                                         </div><!--.post-content box mark-links-->
                                         
@@ -300,18 +340,6 @@
                     <footer id="site-footer" role="contentinfo">
                     <div class="copyrights">
                     <div class="container">
-                        <div class="row" id="copyright-note">
-                            <span>
-                                © 2020 to-the-rescue
-            
-                            <!-- Delete below lines to remove copyright from footer -->
-                            <span class="footer-info-right">
-                                 | Powered by WordPress &amp; <a rel="nofollow" href="https://superbthemes.com/customizable-blogily/">Customizable Blogily</a>
-                            </span>
-                            <!-- Delete above lines to remove copyright from footer -->
-            
-                            </span>
-                        </div>
                     </div>
                 </div>
             </footer><!-- #site-footer -->
@@ -337,15 +365,6 @@
                         }());
                     </script>
                 <!--<![endif]-->
-                        <div id="wpadminbar" class="nojq">
-                                        <a class="screen-reader-shortcut" href="#wp-toolbar" tabindex="1">Skip to toolbar</a>
-                                    <div class="quicklinks" id="wp-toolbar" role="navigation" aria-label="Toolbar">
-                            <ul id="wp-admin-bar-root-default" class="ab-top-menu"><li id="wp-admin-bar-wp-logo" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://localhost/wordpress/wp-admin/about.php"><span class="ab-icon"></span><span class="screen-reader-text">About WordPress</span></a><div class="ab-sub-wrapper"><ul id="wp-admin-bar-wp-logo-default" class="ab-submenu"><li id="wp-admin-bar-about"><a class="ab-item" href="http://localhost/wordpress/wp-admin/about.php">About WordPress</a></li></ul><ul id="wp-admin-bar-wp-logo-external" class="ab-sub-secondary ab-submenu"><li id="wp-admin-bar-wporg"><a class="ab-item" href="https://wordpress.org/">WordPress.org</a></li><li id="wp-admin-bar-documentation"><a class="ab-item" href="https://codex.wordpress.org/">Documentation</a></li><li id="wp-admin-bar-support-forums"><a class="ab-item" href="https://wordpress.org/support/">Support</a></li><li id="wp-admin-bar-feedback"><a class="ab-item" href="https://wordpress.org/support/forum/requests-and-feedback">Feedback</a></li></ul></div></li><li id="wp-admin-bar-site-name" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://localhost/wordpress/wp-admin/">to-the-rescue</a><div class="ab-sub-wrapper"><ul id="wp-admin-bar-site-name-default" class="ab-submenu"><li id="wp-admin-bar-dashboard"><a class="ab-item" href="http://localhost/wordpress/wp-admin/">Dashboard</a></li></ul><ul id="wp-admin-bar-appearance" class="ab-submenu"><li id="wp-admin-bar-themes"><a class="ab-item" href="http://localhost/wordpress/wp-admin/themes.php">Themes</a></li><li id="wp-admin-bar-widgets"><a class="ab-item" href="http://localhost/wordpress/wp-admin/widgets.php">Widgets</a></li><li id="wp-admin-bar-menus"><a class="ab-item" href="http://localhost/wordpress/wp-admin/nav-menus.php">Menus</a></li><li id="wp-admin-bar-background" class="hide-if-customize"><a class="ab-item" href="http://localhost/wordpress/wp-admin/themes.php?page=custom-background">Background</a></li><li id="wp-admin-bar-header" class="hide-if-customize"><a class="ab-item" href="http://localhost/wordpress/wp-admin/themes.php?page=custom-header">Header</a></li></ul></div></li><li id="wp-admin-bar-customize" class="hide-if-no-customize"><a class="ab-item" href="http://localhost/wordpress/wp-admin/customize.php?url=http%3A%2F%2Flocalhost%2Fwordpress%2Ffor-the-people%2F%3Fpreview_id%3D43%26preview_nonce%3Dbfe9d68c5d%26preview%3Dtrue">Customize</a></li><li id="wp-admin-bar-updates"><a class="ab-item" href="http://localhost/wordpress/wp-admin/update-core.php" title="1 Plugin Update, 4 Theme Updates"><span class="ab-icon"></span><span class="ab-label">5</span><span class="screen-reader-text">1 Plugin Update, 4 Theme Updates</span></a></li><li id="wp-admin-bar-comments"><a class="ab-item" href="http://localhost/wordpress/wp-admin/edit-comments.php"><span class="ab-icon"></span><span class="ab-label awaiting-mod pending-count count-0" aria-hidden="true">0</span><span class="screen-reader-text comments-in-moderation-text">0 Comments in moderation</span></a></li><li id="wp-admin-bar-new-content" class="menupop"><a class="ab-item" aria-haspopup="true" href="http://localhost/wordpress/wp-admin/post-new.php"><span class="ab-icon"></span><span class="ab-label">New</span></a><div class="ab-sub-wrapper"><ul id="wp-admin-bar-new-content-default" class="ab-submenu"><li id="wp-admin-bar-new-post"><a class="ab-item" href="http://localhost/wordpress/wp-admin/post-new.php">Post</a></li><li id="wp-admin-bar-new-media"><a class="ab-item" href="http://localhost/wordpress/wp-admin/media-new.php">Media</a></li><li id="wp-admin-bar-new-page"><a class="ab-item" href="http://localhost/wordpress/wp-admin/post-new.php?post_type=page">Page</a></li><li id="wp-admin-bar-new-user"><a class="ab-item" href="http://localhost/wordpress/wp-admin/user-new.php">User</a></li></ul></div></li><li id="wp-admin-bar-edit"><a class="ab-item" href="http://localhost/wordpress/wp-admin/post.php?post=43&amp;action=edit">Edit Page</a></li></ul><ul id="wp-admin-bar-top-secondary" class="ab-top-secondary ab-top-menu"><li id="wp-admin-bar-search" class="admin-bar-search"><div class="ab-item ab-empty-item" tabindex="-1"><form action="http://localhost/wordpress/" method="get" id="adminbarsearch"><input class="adminbar-input" name="s" id="adminbar-search" type="text" value="" maxlength="150"><label for="adminbar-search" class="screen-reader-text">Search</label><input type="submit" class="adminbar-button" value="Search"></form></div></li><li id="wp-admin-bar-my-account" class="menupop with-avatar"><a class="ab-item" aria-haspopup="true" href="http://localhost/wordpress/wp-admin/profile.php">Howdy, <span class="display-name">Kaiwalya</span><img alt="" src="http://2.gravatar.com/avatar/e39c9638d5b45f72c8571192e0027cd4?s=26&amp;d=mm&amp;r=g" srcset="http://2.gravatar.com/avatar/e39c9638d5b45f72c8571192e0027cd4?s=52&amp;d=mm&amp;r=g 2x" class="avatar avatar-26 photo" height="26" width="26"></a><div class="ab-sub-wrapper"><ul id="wp-admin-bar-user-actions" class="ab-submenu"><li id="wp-admin-bar-user-info"><a class="ab-item" tabindex="-1" href="http://localhost/wordpress/wp-admin/profile.php"><img alt="" src="http://2.gravatar.com/avatar/e39c9638d5b45f72c8571192e0027cd4?s=64&amp;d=mm&amp;r=g" srcset="http://2.gravatar.com/avatar/e39c9638d5b45f72c8571192e0027cd4?s=128&amp;d=mm&amp;r=g 2x" class="avatar avatar-64 photo" height="64" width="64"><span class="display-name">Kaiwalya</span></a></li><li id="wp-admin-bar-edit-profile"><a class="ab-item" href="http://localhost/wordpress/wp-admin/profile.php">Edit My Profile</a></li><li id="wp-admin-bar-logout"><a class="ab-item" href="http://localhost/wordpress/wp-login.php?action=logout&amp;_wpnonce=23354162b8">Log Out</a></li></ul></div></li></ul>			</div>
-                                    <a class="screen-reader-shortcut" href="http://localhost/wordpress/wp-login.php?action=logout&amp;_wpnonce=23354162b8">Log Out</a>
-                                </div>
-            
-                    
-            
             
             </div></body>
             </html>
