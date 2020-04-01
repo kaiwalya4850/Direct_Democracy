@@ -55,7 +55,7 @@ for i in range(len(n)):
 	values.append(k)
 
 
-a = entity_cal(values)
+a = entity_cal(n)
 #print(a)
 #print(values)
 # Part to generate reports #
@@ -116,6 +116,7 @@ def report_for_flask(upper_list,rep):
             fin = fin+strc
         i = i+1
         rep.append(fin)
+        fin = ""
 
 report_for_flask(location_reports,location_final_reports)
 report_for_flask(infra_reports,infra_final_reports)
@@ -123,7 +124,7 @@ report_for_flask(ts_reports,ts_final_reports)
 report_for_flask(loneliness_reports,loneliness_final_reports)
 report_for_flask(diseases_reports,diseases_final_reports)
 report_for_flask(date_reports,date_final_reports)
-print(date_final_reports)
+
 
 
 
@@ -133,7 +134,7 @@ print(date_final_reports)
 @appf.route("/")
 # Home Page, display only count in numbers #
 def home():
-    return render_template("index.html", content=date_final_reports)
+    return render_template("index.html",len= len(date_final_reports), date_final_reports =date_final_reports)
 
 @appf.route("/reports")
 def report_show():
