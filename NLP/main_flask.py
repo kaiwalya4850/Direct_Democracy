@@ -23,8 +23,8 @@ try:
         n.append(a)
 except:
     print(u'Missing data')
-print(len(n))
-# Just in case query method fails and it did!
+#print(len(n))
+# Just in case query method fails and it did! #
 # To get count of all entities and their values #
 def entity_cal(lst):
     z = list(lst[0])
@@ -54,6 +54,10 @@ for i in range(len(n)):
 	k.pop(-1) #since every last element is a timestamp
 	values.append(k)
 
+
+a = entity_cal(values)
+#print(a)
+#print(values)
 # Part to generate reports #
 def checkKey(dict, key):      
     if key in dict.keys(): 
@@ -62,8 +66,18 @@ def checkKey(dict, key):
     else:
         val = "no"
     return val
+
+
 # Gets all the data with certain entity #
 # Pass all data as dict and a black list to store #
+# send to next function for flask readable format #
+location_reports = []	
+infra_reports = []	
+ts_reports = []
+loneliness_reports = []
+diseases_reports = []
+date_reports = []
+
 def report_gen(key_name,entity_reports_list):
     for i in range(len(n)):
         k = n[i]
@@ -72,10 +86,46 @@ def report_gen(key_name,entity_reports_list):
             entity_reports_list.append(k)
         else:
             pass
+report_gen("Location",location_reports)		
+report_gen("Infrastructure",infra_reports)
+report_gen("Loneliness",loneliness_reports)
+report_gen("TS",ts_reports)
+report_gen("Diseases",diseases_reports)
+report_gen("DATE",date_reports)
 
-a = entity_cal(values)
-print(a)
-data = a[0]
+
+
+# To get reports ready to be shown on Flask Website #
+# Pass above list with filtered reports #
+# Gives you a list named final_reports #
+location_final_reports = []
+infra_final_reports = []
+ts_final_reports = []
+loneliness_final_reports = []
+diseases_final_reports = []
+date_final_reports = []
+def report_for_flask(upper_list,rep):
+    fin= ""
+    for i in range(len(upper_list)):
+        key_val = list(upper_list[i].keys())
+        val_val = list(upper_list[i].values())
+        for l in range(len(key_val)):
+            stra = str(key_val[l])
+            strb = str(val_val[l])
+            strc = stra+": "+strb+ ", "
+            fin = fin+strc
+        i = i+1
+        rep.append(fin)
+
+report_for_flask(location_reports,location_final_reports)
+report_for_flask(infra_reports,infra_final_reports)
+report_for_flask(ts_reports,ts_final_reports)
+report_for_flask(loneliness_reports,loneliness_final_reports)
+report_for_flask(diseases_reports,diseases_final_reports)
+report_for_flask(date_reports,date_final_reports)
+print(date_final_reports)
+
+
 
 
 
@@ -83,8 +133,11 @@ data = a[0]
 @appf.route("/")
 # Home Page, display only count in numbers #
 def home():
-    return render_template("index.html", content=data)
+    return render_template("index.html", content=date_final_reports)
 
+@appf.route("/reports")
+def report_show():
+    return render_template("report_show.html")
 
 if __name__ == "__main__":
 	appf.run()
