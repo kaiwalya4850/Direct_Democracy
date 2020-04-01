@@ -23,10 +23,13 @@ try:
         n.append(a)
 except:
     print(u'Missing data')
-#print(len(n))
+#print(n)    # Actual data in a list
+
+
 # Just in case query method fails and it did! #
 # To get count of all entities and their values #
-def entity_cal(lst):
+# RETURNS A LIST #
+def entity_cal_list(lst):
     z = list(lst[0])
     #print(z)
     for i in range((len(lst)-1)):
@@ -46,7 +49,44 @@ def entity_cal(lst):
 	    final.append(app)
 	    i = i+1
     return final
+a = entity_cal_list(n)
+#print(a)
+#print(values)
 
+# Get count to pass in homepage #
+def checkKey_to_get_just_count(dict, key):      
+    if key in dict.keys(): 
+        key_count = dict[key] 
+    return key_count
+
+# Entity count calculator RETURNING A DICTIONARY #
+# Pass data list and desired dictionary name #
+def entity_cal_dict(lst,dicti):
+    z = list(lst[0])
+    #print(z)
+    for i in range((len(lst)-1)):
+	    x = list(lst[i+1])
+	    for j in range(len(x)):
+		    y = x[j]
+		    z.append(y)
+		    j = j+1
+	    i = i+1
+    entity_list = list(set(z)) # list of entities on db # 
+    #print(entity_list)
+    for i in range(len(entity_list)):
+        k = entity_list[i]
+        count = z.count(k)
+        dicti[k] = count
+        i = i+1
+entity_dict ={}
+entity_cal_dict(n,entity_dict)
+
+location_count = checkKey_to_get_just_count(entity_dict,"Location")
+infra_count = checkKey_to_get_just_count(entity_dict,"Infrastructure")
+ts_count = checkKey_to_get_just_count(entity_dict,"TS")
+loneliness_count = checkKey_to_get_just_count(entity_dict,"Loneliness")
+diseases_count = checkKey_to_get_just_count(entity_dict,"Diseases")
+date_count =  checkKey_to_get_just_count(entity_dict,"DATE")
 # Getting values in a list "values" #
 values = []
 for i in range(len(n)):
@@ -55,9 +95,7 @@ for i in range(len(n)):
 	values.append(k)
 
 
-a = entity_cal(n)
-#print(a)
-#print(values)
+
 # Part to generate reports #
 def checkKey(dict, key):      
     if key in dict.keys(): 
@@ -128,17 +166,20 @@ report_for_flask(date_reports,date_final_reports)
 
 
 
-
-
 # Lets start with Flask #
 @appf.route("/")
 # Home Page, display only count in numbers #
 def home():
-    return render_template("index.html",len= len(date_final_reports), date_final_reports =date_final_reports)
+    return render_template("index.html",content= location_count,content1= infra_count, content2 = ts_count, \
+	                      content3 = loneliness_count, content4 = diseases_count, content5 = date_count )
 
 @appf.route("/reports")
 def report_show():
-    return render_template("report_show.html")
+    return render_template("report_show.html",len= len(location_final_reports), location_final_reports =location_final_reports, \
+	                    len1= len(infra_final_reports), infra_final_reports =infra_final_reports, \
+						len2= len(loneliness_final_reports), loneliness_final_reports =loneliness_final_reports, \
+						len3= len(diseases_final_reports), diseases_final_reports =diseases_final_reports, \
+						len4= len(date_final_reports), date_final_reports =date_final_reports)
 
 if __name__ == "__main__":
-	appf.run()
+	appf.run(debug=True)
