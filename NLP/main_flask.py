@@ -181,5 +181,14 @@ def report_show():
 						len3= len(diseases_final_reports), diseases_final_reports =diseases_final_reports, \
 						len4= len(date_final_reports), date_final_reports =date_final_reports)
 
+@appf.route("/entity_add", methods=["POST", "GET"])
+def entity_adder():
+    if request.method == "POST":
+        entity_name = request.form["entnm"]
+        problem  = request.form["prob"] 
+        return f"<h1>{entity_name},{problem}</h1>"  
+    else:
+        return render_template("entity_adder.html")
+
 if __name__ == "__main__":
 	appf.run(debug=True)
