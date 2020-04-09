@@ -23,7 +23,7 @@ try:
         n.append(a)
 except:
     print(u'Missing data')
-#print(n)    # Actual data in a list
+print(n)    # Actual data in a list
 
 
 # Just in case query method fails and it did! #
@@ -87,6 +87,7 @@ ts_count = checkKey_to_get_just_count(entity_dict,"TS")
 loneliness_count = checkKey_to_get_just_count(entity_dict,"Loneliness")
 diseases_count = checkKey_to_get_just_count(entity_dict,"Diseases")
 date_count =  checkKey_to_get_just_count(entity_dict,"DATE")
+cardinal_count = checkKey_to_get_just_count(entity_dict,"CARDINAL")
 # Getting values in a list "values" #
 values = []
 for i in range(len(n)):
@@ -115,6 +116,7 @@ ts_reports = []
 loneliness_reports = []
 diseases_reports = []
 date_reports = []
+cardinal_reports =[]
 
 def report_gen(key_name,entity_reports_list):
     for i in range(len(n)):
@@ -130,7 +132,7 @@ report_gen("Loneliness",loneliness_reports)
 report_gen("TS",ts_reports)
 report_gen("Diseases",diseases_reports)
 report_gen("DATE",date_reports)
-
+report_gen("CARDINAL",cardinal_reports)
 
 
 # To get reports ready to be shown on Flask Website #
@@ -142,6 +144,7 @@ ts_final_reports = []
 loneliness_final_reports = []
 diseases_final_reports = []
 date_final_reports = []
+cardinal_final_reports = []
 def report_for_flask(upper_list,rep):
     fin= ""
     for i in range(len(upper_list)):
@@ -162,7 +165,7 @@ report_for_flask(ts_reports,ts_final_reports)
 report_for_flask(loneliness_reports,loneliness_final_reports)
 report_for_flask(diseases_reports,diseases_final_reports)
 report_for_flask(date_reports,date_final_reports)
-
+report_for_flask(cardinal_reports,cardinal_final_reports)
 
 
 
@@ -171,7 +174,7 @@ report_for_flask(date_reports,date_final_reports)
 # Home Page, display only count in numbers #
 def home():
     return render_template("index.html",content= location_count,content1= infra_count, content2 = ts_count, \
-	                      content3 = loneliness_count, content4 = diseases_count, content5 = date_count )
+	                      content3 = loneliness_count, content4 = diseases_count, content5 = date_count, content6 = cardinal_count )
 
 @appf.route("/reports")
 def report_show():
@@ -179,7 +182,8 @@ def report_show():
 	                    len1= len(infra_final_reports), infra_final_reports =infra_final_reports, \
 						len2= len(loneliness_final_reports), loneliness_final_reports =loneliness_final_reports, \
 						len3= len(diseases_final_reports), diseases_final_reports =diseases_final_reports, \
-						len4= len(date_final_reports), date_final_reports =date_final_reports)
+						len4= len(date_final_reports), date_final_reports =date_final_reports, \
+                        len5= len(cardinal_final_reports), cardinal_final_reports = cardinal_final_reports)
 
 @appf.route("/entity_add", methods=["POST", "GET"])
 def entity_adder():
