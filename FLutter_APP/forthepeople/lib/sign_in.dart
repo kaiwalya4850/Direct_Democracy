@@ -50,3 +50,8 @@ void signOutGoogle() async {
 
   print("User Sign Out");
 }
+
+Future<String> GetName() async{
+  print(email);
+  return email;
+}

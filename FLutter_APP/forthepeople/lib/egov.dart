@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:forthepeople/sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class EGov extends StatelessWidget {
   var _firestoreRef = Firestore.instance.collection('E-gov');
+  var _firestoreRef_votes = Firestore.instance.collection('Votes');
   TextEditingController _txtCtrl = TextEditingController();
 
   _launchURL(url) async {
@@ -18,14 +20,12 @@ class EGov extends StatelessWidget {
     }
   }
 
-  deleteMessage(key) {
-    _firestoreRef.document(key).delete();
-  }
 
-  updateTimeStamp(key) {
-    _firestoreRef
+
+  updateVote(key,email,vote) {
+    _firestoreRef_votes
         .document(key)
-        .updateData({"timestamp": DateTime.now().millisecondsSinceEpoch});
+        .setData({email: vote});
   }
 
   @override
@@ -65,11 +65,20 @@ class EGov extends StatelessWidget {
                             buttons: [
                               DialogButton(
                                 child: Text("Support"),
-                                onPressed: (){},
+                                onPressed: () async {
+                                  final String email = await GetName();
+                                  updateVote(item[index]['key'].toString(),email,"Yes");
+                                  Navigator.pop(context);
+
+                                },
                               ),
                               DialogButton(
                                 child: Text("Disregard"),
-                                onPressed: (){},
+                                onPressed: () async {
+                                  final String email = await GetName();
+                                  updateVote(item[index]['key'].toString(),email,"No");
+                                  Navigator.pop(context);
+                                },
                               ),
                               DialogButton(
                                 child: Text("Learn More"),
