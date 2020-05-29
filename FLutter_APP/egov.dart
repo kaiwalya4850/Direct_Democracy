@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+void main() => runApp(MaterialApp(home: MyApp()));
 
-
-class EGov extends StatelessWidget {
-  var _firestoreRef = Firestore.instance.collection('E-gov');
+class MyApp extends StatelessWidget {
+  var _firestoreRef = Firestore.instance.collection('chats');
   TextEditingController _txtCtrl = TextEditingController();
 
-  _launchURL(url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+  sendMessage() {
+    _firestoreRef.add({
+      "message": _txtCtrl.text,
+      "timestamp": DateTime.now().millisecondsSinceEpoch
+    });
+    _txtCtrl.clear();
   }
 
   deleteMessage(key) {
@@ -32,7 +30,7 @@ class EGov extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("E-governance"),
+          title: Text("FlutterOwl"),
         ),
         body: Column(mainAxisAlignment: MainAxisAlignment.start, children: <
             Widget>[
@@ -55,32 +53,13 @@ class EGov extends StatelessWidget {
                     itemCount: item.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(item[index]['key'].toString()),
-
-                        onTap: () {
-                          return Alert(
-                            context: context,
-                            title: (item[index]['key'].toString()),
-                            desc:"Please vote if you Support the bill or not",
-                            buttons: [
-                              DialogButton(
-                                child: Text("Support"),
-                                onPressed: (){},
-                              ),
-                              DialogButton(
-                                child: Text("Disregard"),
-                                onPressed: (){},
-                              ),
-                              DialogButton(
-                                child: Text("Learn More"),
-                                onPressed:  (){_launchURL(item[index]['BIll_link']);},
-                              ),
-                            ]
-
-
-                          ).show();
-                        },
-
+                        title: Text(item[index]['message']),
+                        trailing: Text(DateFormat("hh:mm:ss")
+                            .format(DateTime.fromMicrosecondsSinceEpoch(
+                                item[index]['timestamp'] * 1000))
+                            .toString()),
+                        onTap: () => updateTimeStamp(item[index]['key']),
+                        onLongPress: () => deleteMessage(item[index]['key']),
                       );
                     },
                   );
@@ -88,7 +67,14 @@ class EGov extends StatelessWidget {
               },
             ),
           ),
-
+          Container(
+              child: Row(children: <Widget>[
+            Expanded(child: TextField(controller: _txtCtrl)),
+            SizedBox(
+                width: 80,
+                child: OutlineButton(
+                    child: Text("Add"), onPressed: () => sendMessage()))
+          ]))
         ]));
   }
 }

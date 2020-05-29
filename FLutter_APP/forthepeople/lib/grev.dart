@@ -7,6 +7,7 @@ import 'package:forthepeople/widgets/form_button.dart';
 import 'package:forthepeople/widgets/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'egov.dart';
 import 'login_page.dart';
 
 class LoginFormBloc extends FormBloc<String, String> {
@@ -98,7 +99,9 @@ class LoginForm extends StatelessWidget {
                       ),
                       FormButton(
                         text: 'E-Governance',
-                        onPressed: context.bloc<LoginFormBloc>().submit,
+                        onPressed: () {
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return EGov();}), ModalRoute.withName('/'));
+                        },
                       ),
                       RaisedButton(
                         onPressed: () {
