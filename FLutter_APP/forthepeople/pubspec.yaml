@@ -23,7 +23,11 @@ dependencies:
   firebase_storage:
   image_picker:
   form_bloc:
-  flushbar :
+  flushbar:
+
+    git:
+
+      url: https://github.com/valterh4ck3r/flushbar.git
   liquid_progress_indicator :
   flutter_form_bloc:
   flutter_bloc:

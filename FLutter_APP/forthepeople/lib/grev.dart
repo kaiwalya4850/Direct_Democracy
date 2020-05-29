@@ -7,6 +7,8 @@ import 'package:forthepeople/widgets/form_button.dart';
 import 'package:forthepeople/widgets/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'login_page.dart';
+
 class LoginFormBloc extends FormBloc<String, String> {
   LoginFormBloc() {
     addFieldBloc(
@@ -94,6 +96,27 @@ class LoginForm extends StatelessWidget {
                         text: 'SUBMIT',
                         onPressed: context.bloc<LoginFormBloc>().submit,
                       ),
+                      FormButton(
+                        text: 'E-Governance',
+                        onPressed: context.bloc<LoginFormBloc>().submit,
+                      ),
+                      RaisedButton(
+                        onPressed: () {
+                          signOutGoogle();
+                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) {return LoginPage();}), ModalRoute.withName('/'));
+                        },
+                        color: Colors.deepPurple,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Sign Out',
+                            style: TextStyle(fontSize: 25, color: Colors.white),
+                          ),
+                        ),
+                        elevation: 5,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40)),
+                      )
                     ],
                   );
                 },
