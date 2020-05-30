@@ -61,7 +61,8 @@ class EGov extends StatelessWidget {
                           return Alert(
                             context: context,
                             title: (item[index]['key'].toString()),
-                            desc:"Please vote if you Support the bill or not",
+                            desc:
+                            """Please vote if you Support the bill Bill_Type="""+item[index]['Bill_type'].toString(),
                             buttons: [
                               DialogButton(
                                 child: Text("Support"),
@@ -73,7 +74,7 @@ class EGov extends StatelessWidget {
                                 },
                               ),
                               DialogButton(
-                                child: Text("Disregard"),
+                                child: Text("Against"),
                                 onPressed: () async {
                                   final String email = await GetName();
                                   updateVote(item[index]['key'].toString(),email,"No");
