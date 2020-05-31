@@ -23,7 +23,7 @@ try:
         n.append(a)
 except:
     print(u'Missing data')
-print(n)    # Actual data in a list
+#print(n)    # Actual data in a list
 
 
 # Just in case query method fails and it did! #
@@ -185,14 +185,38 @@ def report_show():
 						len4= len(date_final_reports), date_final_reports =date_final_reports, \
                         len5= len(cardinal_final_reports), cardinal_final_reports = cardinal_final_reports)
 
-@appf.route("/entity_add", methods=["POST", "GET"])
+@appf.route("/ent_add", methods=["POST", "GET"])
 def entity_adder():
     if request.method == "POST":
         entity_name = request.form["entnm"]
-        problem  = request.form["prob"] 
-        return f"<h1>{entity_name},{problem}</h1>"  
+        entity_add = request.form["entadd"]
+        return redirect(url_for("user", ent=entity_name,entn=entity_add)) 
+        #return render_template("entity_adder.html") 
     else:
-        return render_template("entity_adder.html")
+        return render_template("page5_add.html") 
+
+@appf.route("/<ent> /<entn>")
+def user(ent,entn):
+    existing_entity = ["City","Crime","Crime against women","Disaster","Diseases","Infrastructural Problems","Infrastructure","Loneiness"]
+    print(ent,entn)
+    if ent in existing_entity:
+        print("yes")
+        my_data = store.collection('NLP').document(ent)
+        my_data.update({u'values': firestore.ArrayUnion([entn])})
+        return render_template("page5_add.html")
+    else:
+        print("Wrong name")
+        return f"<h2>Wrong name. Entity name must only be from {existing_entity}</h2>"
+
+    '''
+    try:
+        if ent in existing_entity:
+            my_data = store.collection('NLP').document(ent)
+            my_data.update({u'values': firestore.ArrayUnion([entn])})
+    except NameError:
+        print("Invalid names, the names must be from:", existing_entity)
+    '''
+    
 
 if __name__ == "__main__":
-	appf.run(debug=True)
+	appf.run()
