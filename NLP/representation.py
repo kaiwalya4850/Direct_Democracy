@@ -69,6 +69,7 @@ report_for_flask(location_reports,final_reports)
 #print((final_reports))
 
 
+
 # Mid 2 stuff. Includes: Getting e-gov data ready to display, Getting to show number of votes, what is the vote(and who voted) #
 # Other changes include, complete shift from wordpress to Flask static #
 # Remove wordpress completely and make better # 
@@ -85,5 +86,12 @@ try:
         n_id.append(doc_id)
 except:
     print(u'Missing data')
-print(n1)
+#print(n1)
 
+
+# Setting data on firestore #
+name = "Diseases"
+data = "corona virus test 1"
+dic = {u'values':data}
+my_data = store.collection('NLP').document(name)
+my_data.update({u'values': firestore.ArrayUnion([data])})
