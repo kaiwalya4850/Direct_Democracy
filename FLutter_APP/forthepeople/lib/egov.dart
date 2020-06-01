@@ -24,8 +24,11 @@ class EGov extends StatelessWidget {
 
   updateVote(key,email,vote) {
     _firestoreRef_votes
+        .document(key).collection('Votes').document(email)
+        .setData({"vote": vote});
+    _firestoreRef_votes
         .document(key)
-        .setData({email: vote});
+        .setData({"votes": "Yes"});
   }
 
   @override
