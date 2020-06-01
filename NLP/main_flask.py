@@ -167,6 +167,41 @@ report_for_flask(diseases_reports,diseases_final_reports)
 report_for_flask(date_reports,date_final_reports)
 report_for_flask(cardinal_reports,cardinal_final_reports)
 
+# Votes and e-gov stuff #
+# Getting Data #
+store1 = firestore.client()
+doc_ref1 = store1.collection(u'E-gov')
+egov_id = []
+egov_data = []
+try:
+    docs = doc_ref1.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        egov_data.append(a)
+        doc_id = doc.id
+        egov_id.append(doc_id)
+except:
+    print(u'Missing data')
+
+# Getting stuff #
+def get_bill_link_status(names_of_bill,dict_of_link):
+    bill_link = {}
+    draft_bills = {}
+    pending_bills = {}
+    for i in range(len(names_of_bill)):
+        linkx = list(dict_of_link[i].items())
+        linkf = linkx[1][1]
+        names = names_of_bill[i]
+        d_or_p = linkx[0][1]
+        if d_or_p == "Draft":
+            draft_bills[names] = linkf
+        else:
+            pending_bills[names] = linkf
+        i = i+1
+    return draft_bills,pending_bills
+
+d = get_bill_link_status(egov_id,egov_data)
+
 
 
 # Lets start with Flask #
@@ -185,6 +220,10 @@ def report_show():
 						len4= len(date_final_reports), date_final_reports =date_final_reports, \
                         len5= len(cardinal_final_reports), cardinal_final_reports = cardinal_final_reports)
 
+@appf.route("/votes")
+def votes_page():
+    return render_template("votes.html")
+
 @appf.route("/ent_add", methods=["POST", "GET"])
 def entity_adder():
     if request.method == "POST":
@@ -193,6 +232,7 @@ def entity_adder():
         return redirect(url_for("user", ent=entity_name,entn=entity_add))  
     else:
         return render_template("ent_add_new.html") 
+
 
 @appf.route("/<ent> /<entn>")
 def user(ent,entn):
