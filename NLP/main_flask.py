@@ -173,12 +173,12 @@ report_for_flask(cardinal_reports,cardinal_final_reports)
 @appf.route("/")
 # Home Page, display only count in numbers #
 def home():
-    return render_template("index.html",content= location_count,content1= infra_count, content2 = ts_count, \
+    return render_template("index_new.html",content= location_count,content1= infra_count, content2 = ts_count, \
 	                      content3 = loneliness_count, content4 = diseases_count, content5 = date_count, content6 = cardinal_count )
 
 @appf.route("/reports")
 def report_show():
-    return render_template("report_show.html",len= len(location_final_reports), location_final_reports =location_final_reports, \
+    return render_template("report_show_new.html",len= len(location_final_reports), location_final_reports =location_final_reports, \
 	                    len1= len(infra_final_reports), infra_final_reports =infra_final_reports, \
 						len2= len(loneliness_final_reports), loneliness_final_reports =loneliness_final_reports, \
 						len3= len(diseases_final_reports), diseases_final_reports =diseases_final_reports, \
@@ -190,10 +190,9 @@ def entity_adder():
     if request.method == "POST":
         entity_name = request.form["entnm"]
         entity_add = request.form["entadd"]
-        return redirect(url_for("user", ent=entity_name,entn=entity_add)) 
-        #return render_template("entity_adder.html") 
+        return redirect(url_for("user", ent=entity_name,entn=entity_add))  
     else:
-        return render_template("page5_add.html") 
+        return render_template("ent_add_new.html") 
 
 @appf.route("/<ent> /<entn>")
 def user(ent,entn):
@@ -203,7 +202,7 @@ def user(ent,entn):
         print("yes")
         my_data = store.collection('NLP').document(ent)
         my_data.update({u'values': firestore.ArrayUnion([entn])})
-        return render_template("page5_add.html")
+        return render_template("ent_add_new.html")
     else:
         print("Wrong name")
         return f"<h2>Wrong name. Entity name must only be from {existing_entity}</h2>"
