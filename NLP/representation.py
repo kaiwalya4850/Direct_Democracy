@@ -118,7 +118,21 @@ def get_bill_link_status(names_of_bill,dict_of_link):
     return draft_bills,pending_bills
 
 d = get_bill_link_status(egov_id,egov_data)
-
+'''
+store2 = firestore.client()
+doc_ref2 = store2.collection(u'Votes')
+vote_id = []
+vote_data = []
+try:
+    docs = doc_ref2.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        vote_data.append(a)
+        doc_id = doc.id
+        vote_id.append(doc_id)
+except:
+    print(u'Missing data')
+'''
 
 store2 = firestore.client()
 doc_ref2 = store2.collection(u'Votes')
@@ -134,7 +148,68 @@ try:
 except:
     print(u'Missing data')
 
-print(vote_id)
+
+
+# Pass vote_id from above #
+# Gets: Total number of votes(index 0), how many yes(index 1) and no(index 2) #
+def get_vote_stats(vote_id_list):
+    queryx = []
+    qid = []
+    count_dict = {}
+    yes_dict = {}
+    no_dict = {}
+    for i in range(len(vote_id_list)):
+        try:
+            query = doc_ref2.document(vote_id_list[i]).collection('Votes').stream()
+            for doc in query:
+                a = doc.to_dict()
+                queryx.append(a)
+                doc_id = doc.id
+                qid.append(doc_id)
+        except:
+            print(u'Missing data')
+        count_dict[vote_id_list[i]] = len(qid)
+        for j in range(len(qid)):
+            p = list(queryx[j].items())
+            y_or_n = p[0][1]
+            if y_or_n == "Yes":
+                yes_dict[vote_id_list[i]] = qid
+            else:
+                no_dict[vote_id_list[i]] = qid      
+            j = j+1
+
+        queryx = []
+        qid = []
+        i = i+1
+    return count_dict,yes_dict,no_dict
+
+f = get_vote_stats(vote_id)
+
+def yn_count(vote_id_list):
+    queryx = []
+    qid = []
+    ylist = []
+    nlist = []
+    y = 0
+    n = 0
+    for i in range(len(vote_id_list)):
+        try:
+            query = doc_ref2.document(vote_id_list[i]).collection('Votes').stream()
+            for doc in query:
+                a = doc.to_dict()
+                queryx.append(a)
+                doc_id = doc.id
+                qid.append(doc_id)
+        except:
+            print(u'Missing data')
+    return queryx,qid
+
+c = yn_count(vote_id)
+print(c)
+
+        
+
+
 
 
 
