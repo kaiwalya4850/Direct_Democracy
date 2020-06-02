@@ -48,7 +48,14 @@ class LoginFormBloc extends FormBloc<String, String> {
     await databaseReference.collection("Async")
         .document('State')
         .setData({
+      'val': '0',
+
+    });
+    await databaseReference.collection("Async")
+        .document('State')
+        .setData({
       'val': '1',
+
     });
 
 

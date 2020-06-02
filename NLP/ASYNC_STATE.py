@@ -22,7 +22,7 @@ def on_snapshot(doc_snapshot, changes, read_time):
 #################################Process tweets####################################################
 			i=1
 			for ids in docs:
-			i=i+1
+				i=i+1
 				print(ids)
 				report=get_reports(ids,db)
 				d=NLP_E(report,db)
@@ -59,5 +59,5 @@ doc_watch = doc_ref.on_snapshot(on_snapshot)
 
 
 while 1:
-	time.sleep(10)
+	time.sleep(100)
 	print('Listning to FS for state updates....')
