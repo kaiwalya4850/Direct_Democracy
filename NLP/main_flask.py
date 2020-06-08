@@ -268,6 +268,42 @@ no_count = vote_display[2]
 no_count_bill = list(no_count.keys())
 no_count_voters = list(no_count.items())
 
+# Starting Macro Analysis stuff #
+store2 = firestore.client()
+doc_ref2 = store2.collection(u'WEAK_NO_CLASSIFIED')
+non = []
+try:
+    docs = doc_ref2.stream()
+    for doc in docs:
+        doc_id = doc.id
+        non.append(doc_id)    
+except:
+    print(u'Missing data')
+#print(non)       
+
+store2 = firestore.client()
+doc_ref2 = store2.collection(u'REPORTS')
+macro_id = []
+macro_data = []
+try:
+    docs = doc_ref2.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        macro_data.append(a)
+        doc_id = doc.id
+        macro_id.append(doc_id)    
+except:
+    print(u'Missing data')
+#print(macro_data,macro_id)
+
+final_unclassified = {}
+for i in range(len(macro_id)):
+    if macro_id[i] in non:
+        final_unclassified[macro_id[i]] = macro_data[i]['report']
+
+print(final_unclassified)
+
+
 
 
 # Lets start with Flask #
@@ -308,7 +344,6 @@ def user(ent,entn):
     existing_entity = ["City","Crime","Crime against women","Disaster","Diseases","Infrastructural Problems","Infrastructure","Loneiness"]
     print(ent,entn)
     if ent in existing_entity:
-        print("yes")
         my_data = store.collection('NLP').document(ent)
         my_data.update({u'values': firestore.ArrayUnion([entn])})
         return render_template("ent_add_new.html")
@@ -324,7 +359,68 @@ def user(ent,entn):
     except NameError:
         print("Invalid names, the names must be from:", existing_entity)
     '''
+
+@appf.route("/macro_add", methods=["POST", "GET"])
+def macro_adder():
+    if request.method == "POST":
+        city_dat = request.form["city_data"]
+        crime_dat = request.form["crime_data"]
+        cow_dat = request.form["cow_data"]
+        disaster_dat = request.form["disaster_data"]
+        diseases_dat = request.form["disease_data"]
+        infra_dat = request.form["infra_data"]
+        lonely_dat = request.form["lonely_data"]
+        doc_dat = request.form["doc_data"]
+        return redirect(url_for("user1", city = city_dat,crime = crime_dat, cow = cow_dat, disaster = disaster_dat, disease = diseases_dat , \
+                                 infra = infra_dat, lone = lonely_dat, docx = doc_dat))  
+    else:
+        return render_template("macro_analysis.html") 
+
+
+@appf.route("/<city> /<crime> /<cow> /<disaster> /<disease> /<infra> /<lone> /<docx>")
+def user1(city, crime, cow, disaster, disease, infra, lone, docx):
+    to_put = {}
+    #existing_entity = ["City","Crime","Crime against women","Disaster","Diseases","Infrastructural Problems","Infrastructure","Loneiness"]
+    print(city, crime, cow, disaster, disease, infra, lone)
+    if city=="NA":
+        print("na")
+    else:
+        to_put[u"City"] = city 
+
+    if crime=="NA":
+        print("na")
+    else:
+        to_put[u"Crime"] = crime
+
+    if cow=="NA":
+        print("na")
+    else:
+        to_put[u"Crime against women"] = cow
     
+    if disaster=="NA":
+        print("na")
+    else:
+        to_put[u"Disaster"] = disaster
+
+    if disease=="NA":
+        print("na")
+    else:
+        to_put[u"Diseases"] = disease
+
+    if infra=="NA":
+        print("na")
+    else:
+        to_put[u"Infrastructure"] = infra
+        
+    if lone=="NA":
+        print("na")
+    else:
+        to_put[u"Loneliness"] = lone
+
+    print(to_put)
+    docx = str(docx)
+    my_data = store.collection('REPORTS_CLASSIFIED').document(docx).set(to_put)
+    return render_template("macro_analysis.html") 
 
 if __name__ == "__main__":
 	appf.run()
