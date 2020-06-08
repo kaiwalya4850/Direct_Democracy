@@ -205,11 +205,45 @@ def yn_count(vote_id_list):
     return queryx,qid
 
 c = yn_count(vote_id)
-print(c)
-
-        
 
 
 
+# Macro analysis #
+store2 = firestore.client()
+doc_ref2 = store2.collection(u'WEAK_NO_CLASSIFIED')
+non = []
+try:
+    docs = doc_ref2.stream()
+    for doc in docs:
+        doc_id = doc.id
+        non.append(doc_id)    
+except:
+    print(u'Missing data')
 
+print(non)       
 
+store2 = firestore.client()
+doc_ref2 = store2.collection(u'REPORTS')
+macro_id = []
+macro_data = []
+try:
+    docs = doc_ref2.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        macro_data.append(a)
+        doc_id = doc.id
+        macro_id.append(doc_id)    
+except:
+    print(u'Missing data')
+
+#print(macro_data,macro_id)
+
+final_unclassified = {}
+for i in range(len(macro_id)):
+    if macro_id[i] in non:
+        final_unclassified[macro_id[i]] = macro_data[i]['report']
+
+print(final_unclassified)
+
+my_data = store.collection('REPORTS_CLASSIFIED').document('A0ZBircQ3VsmIiqcD8zi')
+my_data.set({u'Location':"Vadodara",u'Something else':'Anything',u'lets see':''})
