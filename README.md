@@ -44,6 +44,20 @@ firestore_read.py
 ```
 
 
+## Application
+The App is a flutter project resising in the flutter_app folder 
+auth file needs to be provvided for authentication from firestore
+
+### Egov.dart
+Displays a list of all the bills stored in the db and then on click fetches additional details like bill status type and link 
+and displays them using rflutter allert widget
+
+### Signin. dart 
+Authentication systems for google signin
+
+### grev.dart
+
+Holds the greviance reporting page and also logout systems also it creates functions wthat write to the firestore db with the grevience entered.
 
 
 ## Contributing
