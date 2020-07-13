@@ -51,7 +51,7 @@
     <div class="container">
         <div class="inner-container" style="width: 66%;">
             <hr class="line" style="width: 25%;">
-            <div class="section-text align-center mbr-white mbr-fonts-style display-5">This page shows all the classified reports, which are provided by the users.</div>
+            <div class="section-text align-center mbr-white mbr-fonts-style display-5">This page shows all the classified reports, classified by specific names.</div>
             <hr class="line" style="width: 25%;">
         </div>
     </div>
@@ -63,7 +63,22 @@
       <div class="container">
           <div class="media-container-row">
               <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
-                <p> {{lone [0]}},{{lone[1]}}</p>
+                <li><strong>Loneliness Reports classified by specific grievance:</strong>
+                    <p>
+                            <ol>
+                                {%for i in range(0, len1)%} 
+                                <li>{{lone[i][0]}}: {{lone[i][1]}}</li> 
+                            {%endfor%} 
+                            </ol>
+                        </p>
+                <li><strong>Diseases classified by names:</strong>
+                                    <p>
+                                            <ol>
+                                                {%for i in range(0, len3)%} 
+                                                <li>{{disease[i][0]}}: {{disease[i][1]}}</li> 
+                                            {%endfor%} 
+                                            </ol>
+                                        </p>
 
               </div>
           </div>
