@@ -65,7 +65,7 @@ def report_for_flask(upper_list,rep):
         rep.append(fin)
 
 
-report_for_flask(location_reports,final_reports)
+#report_for_flask(location_reports,final_reports)
 #print((final_reports))
 
 
@@ -133,7 +133,7 @@ try:
 except:
     print(u'Missing data')
 '''
-
+'''
 store2 = firestore.client()
 doc_ref2 = store2.collection(u'Votes')
 vote_id = []
@@ -148,66 +148,17 @@ try:
 except:
     print(u'Missing data')
 
+vote_dict = {}
 
+for i in range(len(vote_data)):
+    vote_dict[vote_id[i]] = vote_data[i]
 
 # Pass vote_id from above #
 # Gets: Total number of votes(index 0), how many yes(index 1) and no(index 2) #
-def get_vote_stats(vote_id_list):
-    queryx = []
-    qid = []
-    count_dict = {}
-    yes_dict = {}
-    no_dict = {}
-    for i in range(len(vote_id_list)):
-        try:
-            query = doc_ref2.document(vote_id_list[i]).collection('Votes').stream()
-            for doc in query:
-                a = doc.to_dict()
-                queryx.append(a)
-                doc_id = doc.id
-                qid.append(doc_id)
-        except:
-            print(u'Missing data')
-        count_dict[vote_id_list[i]] = len(qid)
-        for j in range(len(qid)):
-            p = list(queryx[j].items())
-            y_or_n = p[0][1]
-            if y_or_n == "Yes":
-                yes_dict[vote_id_list[i]] = qid
-            else:
-                no_dict[vote_id_list[i]] = qid      
-            j = j+1
-
-        queryx = []
-        qid = []
-        i = i+1
-    return count_dict,yes_dict,no_dict
-
-f = get_vote_stats(vote_id)
-
-def yn_count(vote_id_list):
-    queryx = []
-    qid = []
-    ylist = []
-    nlist = []
-    y = 0
-    n = 0
-    for i in range(len(vote_id_list)):
-        try:
-            query = doc_ref2.document(vote_id_list[i]).collection('Votes').stream()
-            for doc in query:
-                a = doc.to_dict()
-                queryx.append(a)
-                doc_id = doc.id
-                qid.append(doc_id)
-        except:
-            print(u'Missing data')
-    return queryx,qid
-
-c = yn_count(vote_id)
+'''
 
 
-
+'''
 # Macro analysis #
 store2 = firestore.client()
 doc_ref2 = store2.collection(u'WEAK_NO_CLASSIFIED')
@@ -247,3 +198,87 @@ print(final_unclassified)
 
 my_data = store.collection('REPORTS_CLASSIFIED').document('A0ZBircQ3VsmIiqcD8zi')
 my_data.set({u'Location':"Vadodara",u'Something else':'Anything',u'lets see':''})
+'''
+
+store1 = firestore.client()
+doc_ref1 = store1.collection(u'REPORTS')
+rep_id = []
+rep_data = []
+try:
+    docs = doc_ref1.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        rep_data.append(a)
+        doc_id = doc.id
+        rep_id.append(doc_id)
+except:
+    print(u'Missing data')
+
+reps = {}
+for i in range(len(rep_id)):
+    reps[rep_id[i]] = rep_data[i]
+
+store1 = firestore.client()
+doc_ref1 = store1.collection(u'REPORTS_CLASSIFIED')
+classrep_id = []
+classrep_data = []
+try:
+    docs = doc_ref1.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        classrep_data.append(a)
+        doc_id = doc.id
+        classrep_id.append(doc_id)
+except:
+    print(u'Missing data')
+
+#print(classrep_data)
+loc_dict = {}
+lone_dict = {}
+disease_dict = {}
+city_dict = {}
+exist = ["City","Crime","Crime against women","Disaster","Diseases","Infrastructural Problems","Infrastructure","Loneiness","Location"]
+for i in range(len(classrep_data)):
+    var = classrep_data[i]
+    if "Diseases" in list(var.keys()):
+        disease_dict[classrep_id[i]] = var['Diseases']
+    if "Location" in list(var.keys()):
+        loc_dict[classrep_id[i]] = var['Location']
+    if "City" in list(var.keys()):
+        city_dict[classrep_id[i]] = var['City']
+    if "Loneliness" in list(var.keys()):
+        lone_dict[classrep_id[i]] = var['Loneliness']
+    i = i+1
+
+def get_key(val,my_dict): 
+    for key, value in my_dict.items(): 
+         if val == value:
+             my_dict.pop(key) 
+             return key 
+
+#print(loc_dict)
+'''
+loc_unique = sorted(list(loc_dict.values()))
+loc_show = {}
+for i in range(len(loc_unique)):
+    key = get_key(loc_unique[i],loc_dict)
+    if key in list(reps.keys()):
+        temp = reps[key]
+        final = temp['report']
+        loc_show[loc_unique[i]] = final
+
+print(loc_show)
+'''
+lone_unique = sorted(list(lone_dict.values()))
+print(lone_unique)
+lone_show = []
+for i in range(len(lone_unique)):
+    key = get_key(lone_unique[i],lone_dict)
+    print(key)
+    lis = []
+    if key in list(reps.keys()):
+        temp = reps[key]
+        final = temp['report']
+        a = (lone_unique[i],final)
+        lone_show.append(a)
+print(lone_show)

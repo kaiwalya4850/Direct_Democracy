@@ -301,8 +301,86 @@ for i in range(len(macro_id)):
     if macro_id[i] in non:
         final_unclassified[macro_id[i]] = macro_data[i]['report']
 
-print(final_unclassified)
+#print(final_unclassified)
 
+store1 = firestore.client()
+doc_ref1 = store1.collection(u'REPORTS')
+rep_id = []
+rep_data = []
+try:
+    docs = doc_ref1.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        rep_data.append(a)
+        doc_id = doc.id
+        rep_id.append(doc_id)
+except:
+    print(u'Missing data')
+
+reps = {}
+for i in range(len(rep_id)):
+    reps[rep_id[i]] = rep_data[i]
+
+store1 = firestore.client()
+doc_ref1 = store1.collection(u'REPORTS_CLASSIFIED')
+classrep_id = []
+classrep_data = []
+try:
+    docs = doc_ref1.stream()
+    for doc in docs:
+        a = doc.to_dict()
+        classrep_data.append(a)
+        doc_id = doc.id
+        classrep_id.append(doc_id)
+except:
+    print(u'Missing data')
+
+#print(classrep_data)
+loc_dict = {}
+lone_dict = {}
+disease_dict = {}
+city_dict = {}
+exist = ["City","Crime","Crime against women","Disaster","Diseases","Infrastructural Problems","Infrastructure","Loneiness","Location"]
+for i in range(len(classrep_data)):
+    var = classrep_data[i]
+    if "Diseases" in list(var.keys()):
+        disease_dict[classrep_id[i]] = var['Diseases']
+    if "Location" in list(var.keys()):
+        loc_dict[classrep_id[i]] = var['Location']
+    if "City" in list(var.keys()):
+        city_dict[classrep_id[i]] = var['City']
+    if "Loneliness" in list(var.keys()):
+        lone_dict[classrep_id[i]] = var['Loneliness']
+    i = i+1
+
+def get_key(val,my_dict): 
+    for key, value in my_dict.items(): 
+         if val == value:
+             my_dict.pop(key) 
+             return key 
+
+lone_unique = sorted(list(lone_dict.values()))
+lone_show = []
+for i in range(len(lone_unique)):
+    key = get_key(lone_unique[i],lone_dict)
+    lis = []
+    if key in list(reps.keys()):
+        temp = reps[key]
+        final = temp['report']
+        a = (lone_unique[i],final)
+        lone_show.append(a)
+
+
+disease_unique = sorted(list(disease_dict.values()))
+disease_show = []
+for i in range(len(disease_unique)):
+    key = get_key(disease_unique[i],disease_dict)
+    lis = []
+    if key in list(reps.keys()):
+        temp = reps[key]
+        final = temp['report']
+        a = (disease_unique[i],final)
+        disease_show.append(a)
 
 
 
@@ -421,6 +499,12 @@ def user1(city, crime, cow, disaster, disease, infra, lone, docx):
     docx = str(docx)
     my_data = store.collection('REPORTS_CLASSIFIED').document(docx).set(to_put)
     return render_template("macro_analysis.html") 
+
+@appf.route("/macro")
+# Home Page, display only count in numbers #
+def mcro():
+    return render_template("mac_ad.html", lone = lone_show, len1 = len(lone_show), \
+                             disease = disease_show, len3 = len(disease_show))
 
 if __name__ == "__main__":
 	appf.run()
