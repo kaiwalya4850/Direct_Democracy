@@ -275,10 +275,10 @@ lone_show = []
 for i in range(len(lone_unique)):
     key = get_key(lone_unique[i],lone_dict)
     print(key)
+    lis = []
     if key in list(reps.keys()):
         temp = reps[key]
         final = temp['report']
-        lone_show.append(final)
-
+        a = (lone_unique[i],final)
+        lone_show.append(a)
 print(lone_show)
-
