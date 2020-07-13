@@ -360,18 +360,27 @@ def get_key(val,my_dict):
              return key 
 
 lone_unique = sorted(list(lone_dict.values()))
-print(lone_unique)
 lone_show = []
 for i in range(len(lone_unique)):
     key = get_key(lone_unique[i],lone_dict)
-    print(key)
+    lis = []
     if key in list(reps.keys()):
         temp = reps[key]
         final = temp['report']
-        lone_show.append(final)
+        a = (lone_unique[i],final)
+        lone_show.append(a)
 
-print(lone_show)
 
+disease_unique = sorted(list(disease_dict.values()))
+disease_show = []
+for i in range(len(disease_unique)):
+    key = get_key(disease_unique[i],disease_dict)
+    lis = []
+    if key in list(reps.keys()):
+        temp = reps[key]
+        final = temp['report']
+        a = (disease_unique[i],final)
+        disease_show.append(a)
 
 
 
@@ -494,7 +503,8 @@ def user1(city, crime, cow, disaster, disease, infra, lone, docx):
 @appf.route("/macro")
 # Home Page, display only count in numbers #
 def mcro():
-    return render_template("mac_ad.html", lone = lone_show )
+    return render_template("mac_ad.html", lone = lone_show, len1 = len(lone_show), \
+                             disease = disease_show, len3 = len(disease_show))
 
 if __name__ == "__main__":
 	appf.run()
