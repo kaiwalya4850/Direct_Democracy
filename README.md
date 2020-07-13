@@ -7,7 +7,7 @@ We have made an Android application for getting inputs from people, then we use 
 
 The code for Android app can be found in Flutter_app folder. While the NLP and flask code is in NLP folder. We have added function to vote on bills, the scraping of data is in E-governance folder.
 
-[![Video of entire working system]](https://www.youtube.com/watch?v=UwXgWav2T-Q&t=32s)
+[[Video of entire working system]](https://www.youtube.com/watch?v=UwXgWav2T-Q&t=32s)
 
 ## Usage
 
